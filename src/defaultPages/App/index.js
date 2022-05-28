@@ -7,8 +7,7 @@ import { createBrowserHistory } from 'history';
 import { jsx } from '@emotion/core';
 
 import PrivateRoute from '../../PrivateRoute';
-
-import KitchenSinkApp from '../../defaultPages/KitchenSinkApp';
+import SignIn from '../../app/SigninPage';
 import HomePage from '../../defaultPages/HomePage';
 
 import * as actions from '../../store/action';
@@ -54,7 +53,7 @@ class App extends React.Component {
                         <PrivateRoute path="/user-list" component={CometChatUserList} />
                         <PrivateRoute path="/messages" component={CometChatMessages} chatWithGroup="supergroup" />
                         <PrivateRoute exact path="/" component={HomePage} />
-                        <Route path="/login" component={KitchenSinkApp} />
+                        <Route path="/login" component={SignIn} />
                     </Switch>
                 </Router>
             </div>
