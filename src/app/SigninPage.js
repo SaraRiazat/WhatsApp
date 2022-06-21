@@ -1,60 +1,32 @@
 import React from 'react';
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
+import { Global } from "@emotion/core";
 import '../styles/_styles.scss';
 import CustomForm from '../view/CustomForm';
 import CustomButton from '../view/CustomButton';
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { jsx } from '@emotion/core'
-
-import { BrowserRouter } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { COMETCHAT_CONSTANTS } from '../consts';
-import { CometChat } from "@cometchat-pro/chat";
 import * as actions from '../store/action';
 
-
-
-class SignIn
-  extends React.PureComponent {
+class SignIn extends React.PureComponent {
 
   constructor(props) {
     super(props);
     this.myRef = React.createRef();
-    this.state = {
-      name: '',
-      userid: '',
-      password: '',
-    }
   }
-  handleSubmit = event => {
-    event.preventDefault()
-
-    this.setState({ name: '', userid: '' })
-  }
-
-  handleChange = event => {
-    const { value, name } = event.target;
-    this.setState({ [name]: value })
-  }
-
 
   login = (uid) => {
 
     if (!uid) {
-      uid = this.myRef.current;
+      uid = this.myRef.current.value;
+      console.log(this.myRef.current.value)
     }
+
     this.uid = uid;
     this.props.onLogin(this.uid, COMETCHAT_CONSTANTS.AUTH_KEY);
-    let authKey = "03ae3a8e24d687ee3b7f26d2f3b8512008f3dd9a";
-    var user = new CometChat.User(this.state.userid);
-    user.setName(this.state.name);
-    CometChat.createUser(user, authKey).then(
-      user => {
-        console.log("user created", user);
-      }, error => {
-        console.log("error", error);
-      }
-    )
   }
 
   render() {
@@ -64,7 +36,6 @@ class SignIn
       loader = (<div className="loading">Loading...</div>);
     }
 
-
     let errorMessage = null;
     if (this.props.error) {
       errorMessage = (<p>{this.props.error.message}</p>);
@@ -72,45 +43,43 @@ class SignIn
 
     let authRedirect = null;
     if (this.props.isLoggedIn) {
-      authRedirect = <BrowserRouter to="/" />
+      authRedirect = <Redirect to="/" />
     }
 
     return (
       <React.Fragment>
-        {console.log(loader)}
-        {authRedirect}
-        {loader}
-        {errorMessage}
+        <div>
+          {authRedirect}
+          {loader}
+          {errorMessage}
+        </div>
         <div className='sign-in'>
           <span></span>
-          <form onSubmit={this.handleSubmit}>
+          <form>
             <div className="signin-section">
               <div className="signin-img">
                 <img className="whatsapp-img" src="signinIcon.png"></img>
               </div>
-              <div>
-                <CustomForm
+              <div className='input-section'>
+                <input
                   name='name'
                   type='email'
-                  value={this.state.name}
                   required
                   label={'name'}
                   handleChange={this.handleChange}
                 />
-                <CustomForm
+                <input
                   ref={this.myRef}
+                  placeholder="Enter your UID here"
                   name='userid'
                   type='text'
-                  value={this.state.userid}
                   required
                   label={'UserId'}
                   handleChange={this.handleChange}
                 />
-                <CustomForm
-                  ref={this.myRef}
+                <input
                   name='password'
                   type='password'
-                  value={this.state.userid}
                   required
                   label={'Password'}
                   handleChange={this.handleChange}
@@ -125,14 +94,13 @@ class SignIn
               </div>
             </div>
           </form>
-        </div>
+//         </div>
       </React.Fragment>
     );
   }
 }
 
 const mapStateToProps = state => {
-  console.log(state)
   return {
     loading: state.loading,
     error: state.error,

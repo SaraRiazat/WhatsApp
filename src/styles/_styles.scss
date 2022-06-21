@@ -65,7 +65,7 @@ $main-color: black;
             outline: none;
         }
 
-        &:focus ~ .form-input-label {
+        &:focus~.form-input-label {
             @include shrinkLabel();
         }
     }
@@ -96,10 +96,18 @@ $main-color: black;
     border-radius: 5px;
     height: 569px;
     margin-top: 150px;
-    display:flex;
+    display: flex;
     justify-content: space-evenly;
 }
+
 .sign-in {
     display: flex;
     justify-content: center;
+}
+
+.input-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
 }
