@@ -2,12 +2,22 @@ import React from "react";
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-
-import { wrapperStyle, titleStyle, subTitleStyle, componentStyle, boxStyle, titleWrapperStyle, thumbnailWrapperStyle, componentTitleStyle, UIComponentStyle, descWrapperStyle, linkWrapperStyle, linkStyle, logoutBtn } from "./style";
-
+import {
+	wrapperStyle,
+	titleStyle,
+	subTitleStyle,
+	componentStyle,
+	boxStyle,
+	titleWrapperStyle,
+	thumbnailWrapperStyle,
+	componentTitleStyle,
+	UIComponentStyle, descWrapperStyle,
+	linkWrapperStyle,
+	linkStyle,
+	logoutBtn
+} from "./style";
 import * as actions from "../../store/action";
 
 import CometChatUI from "./resources/CometChatUI.png";
@@ -202,7 +212,7 @@ class HomePage extends React.Component {
 						</ul>
 					</div>
 				</div>
-				
+
 				<div css={logoutBtn()}>
 					<button type="button" onClick={this.props.onLogout}>
 						Logout

@@ -1,18 +1,18 @@
 import * as actionTypes from './actionTypes';
-
 import { CometChat } from '@cometchat-pro/chat';
 
-export const authStart = () => {
-    return {
-        type: actionTypes.AUTH_START
-    };
-};
+export const authStart = () => { 
+    return { 
+        type: actionTypes.AUTH_START 
+    }; 
+}; 
 
 export const authSuccess = (user) => {
+    console.log("hii")
     return {
-        type: actionTypes.AUTH_SUCCESS,
-        user: user,
-        isLoggedIn: true
+        type: actionTypes.AUTH_SUCCESS, 
+        user: user, 
+        isLoggedIn: true 
     };
 };
 

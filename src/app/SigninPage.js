@@ -1,84 +1,7 @@
-
+import React from 'react';
 import '../styles/_styles.scss';
 import CustomForm from '../view/CustomForm';
 import CustomButton from '../view/CustomButton';
-
-// class SignIn extends React.Component {
-//   constructor(props) {
-//     super(props);
-
-//     this.state = {
-//       email: '',
-//       password: ''
-//     }
-//   }
-
-//   handleSubmit = event => {
-//     event.preventDefault()
-
-//     this.setState({ email: '', password: '' })
-//   }
-
-//   handleChange = event => {
-//     const { value, name } = event.target;
-//     this.setState({ [name]: value })
-//   }
-
-//   render() {
-//     return (
-//       <div className='sign-in'>
-//         <span></span>
-//         <form onSubmit={this.handleSubmit}>
-//           <div className="signin-section">
-//             <div className="signin-img">
-//               <img className="whatsapp-img" src="signinIcon.png"></img>
-//             </div>
-//             <div>
-//               <CustomForm
-//                 name='email'
-//                 type='email'
-//                 value={this.state.email}
-//                 required
-//                 label={'Email'}
-//                 handleChange={this.handleChange}
-//               />
-
-//               <CustomForm
-//                 name='password'
-//                 type='password'
-//                 value={this.state.password}
-//                 required
-//                 label={'Password'}
-//                 handleChange={this.handleChange}
-//               />
-//               <div className='buttons'>
-//                 {/* <CustomButton type='submit'>Sign In</CustomButton> */}
-//                 <CustomButton
-//                   onClick={signInWithGoogle}
-//                   isGoogleSignIn
-//                 >
-//                   Sign In with google
-//                 </CustomButton>
-//               </div>
-//             </div>
-//           </div>
-//         </form>
-//       </div>
-//     )
-//   }
-// }
-
-// export default SignIn
-
-
-
-
-
-
-
-
-
-import React from 'react';
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
@@ -88,6 +11,8 @@ import { connect } from 'react-redux';
 import { COMETCHAT_CONSTANTS } from '../consts';
 import { CometChat } from "@cometchat-pro/chat";
 import * as actions from '../store/action';
+
+
 
 class SignIn
   extends React.PureComponent {
@@ -116,11 +41,11 @@ class SignIn
   login = (uid) => {
 
     if (!uid) {
-      uid = this.myRef.current.value;
+      uid = this.myRef.current;
     }
     this.uid = uid;
     this.props.onLogin(this.uid, COMETCHAT_CONSTANTS.AUTH_KEY);
-    let authKey = "5e5dd1c4bca8feaa0ab7e6611bd1991045081e80";
+    let authKey = "03ae3a8e24d687ee3b7f26d2f3b8512008f3dd9a";
     var user = new CometChat.User(this.state.userid);
     user.setName(this.state.name);
     CometChat.createUser(user, authKey).then(
@@ -152,6 +77,7 @@ class SignIn
 
     return (
       <React.Fragment>
+        {console.log(loader)}
         {authRedirect}
         {loader}
         {errorMessage}
@@ -206,6 +132,7 @@ class SignIn
 }
 
 const mapStateToProps = state => {
+  console.log(state)
   return {
     loading: state.loading,
     error: state.error,
