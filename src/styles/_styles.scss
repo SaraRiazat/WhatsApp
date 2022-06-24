@@ -109,5 +109,17 @@ $main-color: black;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+}
+
+.text-Link {
+    color: rgb(34, 82, 255);
+    font-weight: bold
+}
+
+.text-successfully {
+    color: #05744d;
+}
+
+.text-error{
+    color: rgb(255, 0, 0);
 }

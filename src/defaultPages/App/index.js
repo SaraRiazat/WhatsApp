@@ -7,8 +7,10 @@ import { createBrowserHistory } from 'history';
 import { jsx } from '@emotion/core';
 
 import PrivateRoute from '../../PrivateRoute';
-import SignIn from '../../app/SigninPage';
+import LogIn from '../../app/LogInpage';
 import HomePage from '../../defaultPages/HomePage';
+import SignUp from '../../app/SignUppage';
+import ChatPage from '../../app/ChatPage';
 
 import * as actions from '../../store/action';
 
@@ -52,8 +54,9 @@ class App extends React.Component {
                         <PrivateRoute path="/group-list" component={CometChatGroupList} />
                         <PrivateRoute path="/user-list" component={CometChatUserList} />
                         <PrivateRoute path="/messages" component={CometChatMessages} chatWithGroup="supergroup" />
-                        <PrivateRoute exact path="/" component={HomePage} />
-                        <Route path="/login" component={SignIn} />
+                        <PrivateRoute exact path="/" component={ChatPage} />
+                        <Route path="/signup" component={SignUp} />
+                        <Route path="/login" component={LogIn} />
                     </Switch>
                 </Router>
             </div>

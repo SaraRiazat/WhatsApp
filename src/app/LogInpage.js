@@ -1,3 +1,4 @@
+
 import React from 'react';
 /** @jsxRuntime classic */
 /** @jsx jsx */
@@ -6,12 +7,12 @@ import { Global } from "@emotion/core";
 import '../styles/_styles.scss';
 import CustomForm from '../view/CustomForm';
 import CustomButton from '../view/CustomButton';
-import { Redirect } from 'react-router-dom';
+import { Redirect , Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { COMETCHAT_CONSTANTS } from '../consts';
 import * as actions from '../store/action';
 
-class SignIn extends React.PureComponent {
+class LogIn extends React.PureComponent {
 
   constructor(props) {
     super(props);
@@ -51,7 +52,6 @@ class SignIn extends React.PureComponent {
         <div>
           {authRedirect}
           {loader}
-          {errorMessage}
         </div>
         <div className='sign-in'>
           <span></span>
@@ -61,40 +61,42 @@ class SignIn extends React.PureComponent {
                 <img className="whatsapp-img" src="signinIcon.png"></img>
               </div>
               <div className='input-section'>
-                <input
-                  name='name'
-                  type='email'
-                  required
-                  label={'name'}
-                  handleChange={this.handleChange}
-                />
-                <input
-                  ref={this.myRef}
-                  placeholder="Enter your UID here"
-                  name='userid'
-                  type='text'
-                  required
-                  label={'UserId'}
-                  handleChange={this.handleChange}
-                />
-                <input
-                  name='password'
-                  type='password'
-                  required
-                  label={'Password'}
-                  handleChange={this.handleChange}
-                />
+                <div className="group">
+                  <input
+                    name='name'
+                    type='email'
+                    className="form-input"
+                    placeholder='Name'
+                    required
+                    handleChange={this.handleChange}
+                  />
+                </div>
+                <div className="group">
+                  <input
+                    ref={this.myRef}
+                    name='userid'
+                    type='text'
+                    className="form-input"
+                    placeholder='User Id'
+                    required
+                    handleChange={this.handleChange}
+                  />
+                </div>
                 <div className='buttons'>
                   <CustomButton
                     onClick={() => this.login()}
                   >
                     Sign In
                   </CustomButton>
+                  <Link to="/signup">
+                    <p className='text-Link'>you don't have account? Sign in</p>
+                  </Link>
+                  <p className='text-error'>{errorMessage}</p>
                 </div>
               </div>
             </div>
           </form>
-//         </div>
+        </div>
       </React.Fragment>
     );
   }
@@ -114,4 +116,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(LogIn);

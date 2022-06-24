@@ -4,12 +4,10 @@ import React from "react";
 import { jsx } from "@emotion/core";
 import PropTypes from "prop-types";
 import { CometChat } from "@cometchat-pro/chat";
-
 import { CometChatAvatar, CometChatToastNotification } from "../../Shared";
-
 import { theme } from "../../../resources/theme";
 import Translator from "../../../resources/localization/translator";
-
+import * as actionTypes from '../../../../../../store/actionTypes';
 import {
 	userInfoScreenStyle,
 	headerStyle,
@@ -31,6 +29,7 @@ import privacyIcon from "./resources/privacy.svg";
 import chatIcon from "./resources/chats.svg";
 import helpIcon from "./resources/help.svg";
 import reportIcon from "./resources/warning.svg";
+import logoutIcon from "./resources/logout.png"
 
 class CometChatUserProfile extends React.Component {
 
@@ -46,16 +45,27 @@ class CometChatUserProfile extends React.Component {
 	}
 
 	componentDidMount() {
-		
+
 		CometChat.getLoggedinUser().then(user => {
 			this.setState({ loggedInUser: user });
 		}).catch(error => this.toastRef.setError("SOMETHING_WRONG"));
 	}
 
+	logout = () => {
+		console.log("hi 1")
+		const logoutSuccess = () => {
+			return {
+				type: actionTypes.AUTH_LOGOUT,
+				authRedirectPath: "/login"
+			};
+		}
+		CometChat.logout().then((logoutSuccess()));
+	}
+
 	render() {
 
 		let userProfile = null;
-		if(this.state.loggedInUser) {
+		if (this.state.loggedInUser) {
 
 			let avatar = <CometChatAvatar user={this.state.loggedInUser} />;
 			userProfile = (
@@ -113,6 +123,14 @@ class CometChatUserProfile extends React.Component {
 									{Translator.translate("REPORT_PROBLEM", this.props.lang)}
 								</div>
 							</div>
+							<div css={optionStyle(logoutIcon)} className="option option-report">
+								<div css={optionNameStyle()} className="option_name">
+									<button onClick={this.logout}>
+										{Translator.translate("LogOut", this.props.lang)}
+									</button>
+
+								</div>
+							</div>
 						</div>
 					</div>
 				</React.Fragment>
@@ -128,7 +146,6 @@ class CometChatUserProfile extends React.Component {
 	}
 }
 
-// Specifies the default values for props:
 CometChatUserProfile.defaultProps = {
 	lang: Translator.getDefaultLanguage(),
 	theme: theme
@@ -138,5 +155,6 @@ CometChatUserProfile.propTypes = {
 	lang: PropTypes.string,
 	theme: PropTypes.object
 }
+
 
 export { CometChatUserProfile };
