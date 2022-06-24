@@ -91,13 +91,22 @@ $main-color: black;
 }
 
 .signin-section {
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15), 0 4px 6px 2px rgba(0, 0, 0, 0.15) !important;
-    width: 900px;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 15%), 0 4px 6px 2px rgb(0 0 0 / 15%) !important;
+    width: 100%;
     border-radius: 5px;
-    height: 569px;
-    margin-top: 150px;
+    padding: 3%;
+    margin-top: 10%;
     display: flex;
     justify-content: space-evenly;
+}
+
+.signin-img {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .whatsapp-img{
+        max-width: 80%;
+    }
 }
 
 .sign-in {
@@ -120,6 +129,6 @@ $main-color: black;
     color: #05744d;
 }
 
-.text-error{
+.text-error {
     color: rgb(255, 0, 0);
 }

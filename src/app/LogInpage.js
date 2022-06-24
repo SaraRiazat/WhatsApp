@@ -7,7 +7,7 @@ import { Global } from "@emotion/core";
 import '../styles/_styles.scss';
 import CustomForm from '../view/CustomForm';
 import CustomButton from '../view/CustomButton';
-import { Redirect , Link} from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { COMETCHAT_CONSTANTS } from '../consts';
 import * as actions from '../store/action';
@@ -23,7 +23,7 @@ class LogIn extends React.PureComponent {
 
     if (!uid) {
       uid = this.myRef.current.value;
-      console.log(this.myRef.current.value)
+      console.log(this.myRef.value)
     }
 
     this.uid = uid;
@@ -55,38 +55,36 @@ class LogIn extends React.PureComponent {
         </div>
         <div className='sign-in'>
           <span></span>
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <div className="signin-section">
               <div className="signin-img">
                 <img className="whatsapp-img" src="signinIcon.png"></img>
               </div>
-              <div className='input-section'>
-                <div className="group">
-                  <input
-                    name='name'
-                    type='email'
-                    className="form-input"
-                    placeholder='Name'
-                    required
-                    handleChange={this.handleChange}
-                  />
-                </div>
-                <div className="group">
-                  <input
-                    ref={this.myRef}
-                    name='userid'
-                    type='text'
-                    className="form-input"
-                    placeholder='User Id'
-                    required
-                    handleChange={this.handleChange}
-                  />
+              <div>
+                <CustomForm
+                   name='name'
+                   type='email'
+                   className="form-input"
+                   placeholder='Name'
+                   required
+                   handleChange={this.handleChange}
+                />
+                 <div className="group">
+                <input
+                 ref={this.myRef}
+                 name='userid'
+                 type='text'
+                 className="form-input"
+                 placeholder='User Id'
+                 required
+                 handleChange={this.handleChange}
+                />
                 </div>
                 <div className='buttons'>
                   <CustomButton
                     onClick={() => this.login()}
                   >
-                    Sign In
+                    logIn
                   </CustomButton>
                   <Link to="/signup">
                     <p className='text-Link'>you don't have account? Sign in</p>
